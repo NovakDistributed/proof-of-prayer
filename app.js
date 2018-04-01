@@ -9,6 +9,11 @@ const CURRENCY = "USD"
 // Where do you need to be premium?
 const PREMIUM_CUTOFF = 1000
 
+// Premium is not going to work if people are not always on the same domain and protocol
+const CORRECT_URL="https://proofofprayer.org"
+const CORRECT_PROTOCOL = "https:"
+const CORRECT_DOMAIN = "proofofprayer.org"
+
 // Find the form to set up praying
 const prayForm = document.getElementById("prayForm")
 const prayButton = document.getElementById("pray")
@@ -44,6 +49,15 @@ const verifyProgress = document.getElementById("verifyProgress")
 const verifyDone = document.getElementById("verifyDone")
 const verdictText = document.getElementById("verdict")
 const verifyAgain = document.getElementById("verifyAgain")
+
+function ensureCorrectDomain() {
+  if (window.location.protocol != "file:") {
+    if (window.location.protocol != CORRECT_PROTOCOL || window.location.hostname != CORRECT_DOMAIN) {
+      // Go to the right URL
+      window.location = CORRECT_URL
+    }
+  }
+}
 
 // Define functions to show and hide collapsing elements.
 // Only work on collapse-class elements
@@ -148,6 +162,8 @@ const stripeHandler = StripeCheckout.configure({
 })
    
 function setup() {
+  
+  ensureCorrectDomain()
   
   // Clear out browser cruft
   proofField.value = ""
