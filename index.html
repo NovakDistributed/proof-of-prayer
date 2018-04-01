@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Proof of Prayer</title>
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="custom.css">
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+        <script type="text/javascript" src="sha256.js" charset="utf-8"></script>
+        <script type="text/javascript" src="prayer.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Proof of Prayer</h1>
+                    <p>This web site allows you to automatically, and provably, pray.</p>
+                    <p>Copies of prayers are cryptographically hashed, together with unique information provided by you, to produce a hash value. This hash value, together with the specification of what hashing was done to produce it, can be used by anyone to mathematically verify that the given number of copies of the given prayer were run through the hash function.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="prayForm" class="collapse show">
+                        <h2>Pray</h2>
+                        <p>Fill out the form below to pray. The prayer you select will be prayed in your name, by computer, the number of times you select.</p>
+                        <p>You will receive a proof-of-prayer that you can copy and paste, for later verification.</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="textId">Select prayer</label>
+                                <select id="textId" class="form-control">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="text">Prayer text</label>
+                                <textarea id="text" class="form-control" rows="10" placeholder="Type your custom prayer here" disabled></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Enter your name</label>
+                                <input  id="name" type="text" value="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="count">Select number of times to pray</label>
+                                <select id="count" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="250">250</option>
+                                    <option value="1000">1,000</option>
+                                    <option value="1000">5,000</option>
+                                    <option value="1000">250,000</option>
+                                    <option value="1000000">1,000,000</option>
+                                </select>
+                            </div>
+                            <div id="premiumOffer" class="collapse">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-text">
+                                           <p>High-volume prayer options are available for a nominal donation of $5.00. These donations support this site!<p>
+                                           <p>If you donate, your donor status will be recorded in your browser for the next time you visit.</p>
+                                        </div>
+                                        <input id="buyButton" type="button" class="btn btn-primary" value="Donate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="premiumThanks" class="collapse">
+                                <p>Premium prayer options are enabled! Thank you for supporting this site.</p>
+                            </div>
+                            <input type="submit" class="btn btn-primary collapse show" id="pray" value="Pray">
+                        </form>
+                    </div>
+                    <div id="prayWait" class="collapse">
+                        <h2>Praying...</h2>
+                        <div class="progress">
+                            <div id="prayProgress" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                    </div>
+                    <div id="prayDone" class="collapse">
+                        <h2>Prayer Complete!</h2>
+                        <p>Click in the box below to select and copy your proof.</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-text" id="output">
+                                </div>
+                            </div>
+                        </div>
+                        <input id="prayAgain" type="button" class="btn btn-primary" value="Pray Again">
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-md-6">
+                    <div id="verifyForm" class="collapse show">
+                        <h2>Verify a Prayer</h2>
+                        <p>If you have received a proof-of-prayer, you can use the form below to verify that the corresponding number of prayers were indeed prayed.</p>
+                        <p>Simply paste the proof into the box below, and click on "Verify".</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="proof">Paste proof here</label>
+                                <textarea id="proof" class="form-control"></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-primary" id="verify" value="Verify">
+                        </form>
+                    </div>
+                    <div id="verifyWait" class="collapse">
+                        <h2>Verifying Prayer...</h2>
+                        <div class="progress">
+                            <div id="verifyProgress" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                    </div>
+                    <div id="verifyDone" class="collapse">
+                        <h2>Verification complete!</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-text" id="verdict">
+                                </div>
+                            </div>
+                        </div>
+                        <input id="verifyAgain" type="button" class="btn btn-primary" value="Verify Again">
+                    </div>
+                </div>
+            </div>
+        
+            <footer class="footer row">
+                <div class="col-md-12">
+                    <span class="text-muted">(C) 2018 Novak Distributed</span>
+                </div>
+            </footer>
+        </div>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>

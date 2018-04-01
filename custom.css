@@ -1,0 +1,11 @@
+/* If we update the progress abr too fast it doesn't have time to animate. */
+.progress .progress-bar {
+    -webkit-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+footer {
+    margin-top: 3em;
+    text-align: center;
+}
