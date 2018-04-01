@@ -22,7 +22,8 @@ but deliver us from evil. Amen.`
 }
 
 // How many hashes can we do per JS tick?
-const BATCH_SIZE = 10;
+const BIG_BATCH_SIZE = 1000;
+const SMALL_BATCH_SIZE = 1;
 
 // Depends on global Sha256 from sha256.js
 const Hasher = Sha256;
@@ -65,10 +66,13 @@ async function hashProof(proof, progress) {
   // And the iteration count
   const count = proof['count']
 
+  // What batch size to use, so we have proper progress for small batches
+  const batchSize = count > BIG_BATCH_SIZE ? BIG_BATCH_SIZE : SMALL_BATCH_SIZE
+
   // How many full batches do we need to make up the requested iteration count?
-  const fullBatches = Math.floor(count / BATCH_SIZE)
+  const fullBatches = Math.floor(count / batchSize)
   // And how much in the last partial batch?
-  const partialBatch = count % BATCH_SIZE
+  const partialBatch = count % batchSize
   
   // Start by hashing the nonce and timestamp
   const base = petitioner + "|" + timestamp + "|" + count
@@ -76,7 +80,7 @@ async function hashProof(proof, progress) {
   
   for (let i = 0; i < fullBatches; i++) {
     // Do all the full batches
-    hash = await hashInRepeatedly(hash, text, BATCH_SIZE)
+    hash = await hashInRepeatedly(hash, text, batchSize)
     
     if (progress) {
       // Call the progress callback
