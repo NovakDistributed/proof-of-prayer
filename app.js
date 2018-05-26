@@ -7,7 +7,8 @@ const STRIPE_KEY="pk_live_nLJ24ir1ML9CkYL2vRh7XDuq"
 const PRICE_IN_CENTS = 500
 const CURRENCY = "USD"
 // Where do you need to be premium?
-const PREMIUM_CUTOFF = 1000
+// Set to a super high value to make premium go away.
+const PREMIUM_CUTOFF = 100000000
 
 // Premium is not going to work if people are not always on the same domain and protocol
 const CORRECT_URL="https://proofofprayer.org"
